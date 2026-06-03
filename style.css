@@ -72,8 +72,9 @@ section{padding:84px 0}
 .brand{display:flex;align-items:center;gap:.7rem;font-family:var(--display);
   font-weight:700;font-size:1.3rem;color:var(--navy);letter-spacing:-.01em}
 .brand img{width:66px;height:66px;object-fit:contain}
+.brand span{white-space:nowrap;line-height:1.1}
 .brand span small{display:block;font-size:.6rem;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--blue);font-weight:600;margin-top:-2px}
+  text-transform:uppercase;color:var(--blue);font-weight:600;margin-top:0}
 .nav-links{display:flex;align-items:center;gap:2rem;list-style:none;margin:0;padding:0}
 .nav-links a{font-family:var(--display);font-weight:500;color:var(--navy);font-size:.98rem}
 .nav-links a:hover{color:var(--blue)}
@@ -92,7 +93,7 @@ section{padding:84px 0}
 /* Full-bleed photo hero (home) */
 .hero--photo{padding:0;background-size:cover;background-position:center 28%;background-repeat:no-repeat}
 .hero--photo::after{content:"";position:absolute;inset:0;z-index:0;
-  background:linear-gradient(110deg,rgba(7,19,34,.90) 0%,rgba(8,24,44,.74) 46%,rgba(10,40,70,.55) 100%)}
+  background:linear-gradient(110deg,rgba(7,19,34,.85) 0%,rgba(8,24,44,.69) 46%,rgba(10,40,70,.50) 100%)}
 /* size the hero to one screen and vertically center the content */
 .hero--photo .wrap{position:relative;z-index:1;min-height:calc(100vh - 88px);
   display:flex;align-items:center}
@@ -120,13 +121,20 @@ section{padding:84px 0}
   background:radial-gradient(circle,rgba(91,164,214,.55),transparent 70%);
   top:-160px;right:-120px;pointer-events:none}
 
-/* ---------- Trust bar ---------- */
-.trust{background:var(--navy-deep);color:#fff;padding:0}
-.trust-row{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 38px;
-  padding:20px 0;align-items:center}
-.trust-row span{display:inline-flex;align-items:center;gap:.5rem;
-  font-family:var(--display);font-weight:500;font-size:.96rem;color:rgba(255,255,255,.9)}
-.trust-row svg{color:var(--blue-light)}
+/* ---------- Trust bar (scrolling marquee) ---------- */
+.trust{background:var(--navy-deep);color:#fff;padding:0;overflow:hidden}
+.marquee{overflow:hidden;width:100%;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.marquee-track{display:flex;width:max-content;align-items:center;
+  animation:marquee 30s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee-track span{display:inline-flex;align-items:center;gap:.55rem;
+  padding:17px 30px;white-space:nowrap;font-family:var(--display);font-weight:500;
+  font-size:.95rem;color:rgba(255,255,255,.92)}
+.marquee-track svg{color:var(--blue-light);flex:0 0 auto}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(max-width:680px){.marquee-track{animation-duration:20s}.marquee-track span{padding:15px 22px;font-size:.9rem}}
 
 /* ---------- Cards / services ---------- */
 .grid{display:grid;gap:26px}
@@ -348,11 +356,17 @@ section{padding:84px 0}
   .masonry{columns:2}
 }
 @media(max-width:680px){
-  section{padding:60px 0}
-  .nav-links,.nav-cta .nav-phone{display:none}
-  .nav-toggle{display:block}
-  .nav-links.open{display:flex;position:absolute;top:74px;left:0;right:0;flex-direction:column;
-    background:#fff;padding:18px 22px;gap:1rem;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+  section{padding:56px 0}
+  .nav{height:72px}
+  .brand{gap:.55rem;font-size:1.4rem}
+  .brand img{width:54px;height:54px}
+  .brand span small{font-size:.58rem;letter-spacing:.16em}
+  .nav-links,.nav-cta{display:none}            /* remove Free Quote + phone from mobile header */
+  .nav-toggle{display:block;margin-right:-4px}
+  .nav-links.open{display:flex;position:absolute;top:72px;left:0;right:0;flex-direction:column;
+    background:#fff;padding:18px 22px;gap:1.1rem;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+  .nav-links.open a{font-size:1.05rem}
+  .hero--photo .wrap{min-height:calc(100svh - 136px)}
   .grid-2,.grid-3,.grid-4,.price-grid,.steps,.ba-grid,.owners,.footer-grid{grid-template-columns:1fr}
   .masonry{columns:1}
   .deal{padding:30px;text-align:center;justify-content:center}
