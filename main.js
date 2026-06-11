@@ -37,25 +37,40 @@ document.addEventListener('DOMContentLoaded', function () {
     setPos(50);
   });
 
-  /* Quote form -> opens email with prefilled details (placeholder until a backend/Formspree is connected) */
+  /* Quote form -> submits to Web3Forms, which emails the lead to the business inbox */
   var form = document.getElementById('quoteForm');
   if (form) {
+    var ok = form.querySelector('.form-ok');
+    function showMsg(text, isError) {
+      if (!ok) return;
+      ok.textContent = text;
+      ok.style.display = 'block';
+      if (isError) { ok.style.background = '#fdecea'; ok.style.borderColor = '#e0726a'; ok.style.color = '#b3261e'; }
+      ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var f = form.elements;
-      var subject = encodeURIComponent('Window Cleaning Quote Request — ' + (f.name.value || 'New lead'));
-      var body = encodeURIComponent(
-        'Name: ' + f.name.value +
-        '\nPhone: ' + f.phone.value +
-        '\nEmail: ' + (f.email ? f.email.value : '') +
-        '\nAddress / Town: ' + (f.address ? f.address.value : '') +
-        '\nService: ' + (f.service ? f.service.value : '') +
-        '\n\nDetails:\n' + (f.message ? f.message.value : '')
-      );
-      // TODO: replace with the business email once set up (e.g. hello@ultraview.today)
-      window.location.href = 'mailto:hello@ultraview.today?subject=' + subject + '&body=' + body;
-      var ok = document.querySelector('.form-ok');
-      if (ok) { ok.style.display = 'block'; }
+      var btn = form.querySelector('button[type="submit"]');
+      var label = btn ? btn.textContent : '';
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+      fetch(form.getAttribute('action'), {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (json) {
+          if (json && (json.success === true || json.success === 'true')) {
+            showMsg("Thanks! We've got your request — we'll get right back to you. 🪟", false);
+            form.reset();
+          } else {
+            showMsg('Sorry, something went wrong. Please call or text us at (708) 701-1906.', true);
+          }
+        })
+        .catch(function () {
+          showMsg('Sorry, something went wrong. Please call or text us at (708) 701-1906.', true);
+        })
+        .finally(function () { if (btn) { btn.disabled = false; btn.textContent = label; } });
     });
   }
 
