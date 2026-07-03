@@ -45,7 +45,13 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!ok) return;
       ok.textContent = text;
       ok.style.display = 'block';
-      if (isError) { ok.style.background = '#fdecea'; ok.style.borderColor = '#e0726a'; ok.style.color = '#b3261e'; }
+      if (isError) {
+        // soft amber notice (not alarming red) with a call-to-action fallback
+        ok.style.background = '#fff6e6'; ok.style.borderColor = '#e0a63c'; ok.style.color = '#8a5a12';
+      } else {
+        // reset to the default green success styling from the stylesheet
+        ok.style.background = ''; ok.style.borderColor = ''; ok.style.color = '';
+      }
       ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
     form.addEventListener('submit', function (e) {
