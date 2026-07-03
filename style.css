@@ -343,6 +343,51 @@ section{padding:84px 0}
   .reveal{opacity:1;transform:none}
 }
 
+/* ---------- Blog ---------- */
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.post-card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);
+  border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);
+  transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s ease}
+.post-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.post-card .thumb{height:180px;width:100%;object-fit:cover;display:block}
+.post-card .pc-body{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
+.post-card .cat{font-family:var(--display);text-transform:uppercase;letter-spacing:.12em;
+  font-size:.7rem;font-weight:600;color:var(--blue);margin-bottom:.5rem}
+.post-card h3{font-size:1.16rem;margin-bottom:.45rem;line-height:1.28}
+.post-card h3 a{color:var(--navy)}
+.post-card h3 a:hover{color:var(--blue)}
+.post-card p{color:var(--muted);font-size:.94rem;margin:0 0 .9rem}
+.post-card .read{font-family:var(--display);font-weight:600;color:var(--green-dark);
+  margin-top:auto;display:inline-flex;gap:.3rem;align-items:center}
+.post-meta{color:var(--muted);font-size:.9rem;font-family:var(--display)}
+
+/* Article */
+.article-hero{background:linear-gradient(120deg,var(--navy-deep),var(--navy) 60%,var(--blue) 140%);
+  color:#fff;padding:66px 0 58px;position:relative;overflow:hidden}
+.article-hero .eyebrow{color:var(--blue-light)}
+.article-hero h1{color:#fff;max-width:840px;font-size:clamp(1.9rem,4vw,2.85rem)}
+.article-hero .post-meta{color:rgba(255,255,255,.82);margin-top:.7rem}
+.article-figure{max-width:960px;margin:-34px auto 0;padding:0 38px;position:relative;z-index:2}
+.article-figure img{width:100%;height:auto;max-height:440px;object-fit:cover;
+  border-radius:var(--radius);box-shadow:var(--shadow-lg)}
+.article-body{max-width:760px;margin:0 auto;padding:50px 38px 20px}
+.article-body>p{font-size:1.08rem;color:#22303c;margin-bottom:1.15rem;line-height:1.72}
+.article-body h2{font-size:1.55rem;margin:2.1rem 0 .7rem}
+.article-body h3{font-size:1.18rem;margin:1.5rem 0 .4rem}
+.article-body ul,.article-body ol{margin:0 0 1.2rem;padding-left:1.25rem;color:#22303c;line-height:1.7}
+.article-body li{margin-bottom:.5rem}
+.article-body a{color:var(--blue);font-weight:600}
+.article-body a:hover{text-decoration:underline;text-underline-offset:2px}
+.callout{background:var(--sky-1);border-left:4px solid var(--blue);border-radius:12px;
+  padding:18px 24px;margin:1.7rem 0}
+.callout p{margin:0;color:#22303c}
+.callout b{font-family:var(--display);color:var(--navy)}
+.article-cta{background:var(--sky-1);border:1px solid var(--line);border-radius:var(--radius);
+  padding:26px 28px;margin:2rem 0 0;display:flex;align-items:center;justify-content:space-between;
+  gap:20px;flex-wrap:wrap}
+.article-cta b{font-family:var(--display);color:var(--navy);font-size:1.15rem}
+.related{border-top:1px solid var(--line);margin-top:10px}
+
 /* ---------- Responsive ---------- */
 @media(max-width:980px){
   .hero-grid{grid-template-columns:1fr;gap:34px;padding:64px 0}
@@ -350,7 +395,7 @@ section{padding:84px 0}
   .feature{grid-template-columns:1fr;gap:30px}
   .feature.rev .feature-text{order:0}
   .feature img{height:300px}
-  .grid-3,.grid-4,.price-grid,.steps{grid-template-columns:repeat(2,1fr)}
+  .grid-3,.grid-4,.price-grid,.steps,.blog-grid{grid-template-columns:repeat(2,1fr)}
   .contact-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
   .masonry{columns:2}
@@ -367,8 +412,11 @@ section{padding:84px 0}
     background:#fff;padding:18px 22px;gap:1.1rem;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
   .nav-links.open a{font-size:1.05rem}
   .hero--photo .wrap{min-height:calc(100svh - 136px)}
-  .grid-2,.grid-3,.grid-4,.price-grid,.steps,.ba-grid,.owners,.footer-grid{grid-template-columns:1fr}
+  .grid-2,.grid-3,.grid-4,.price-grid,.steps,.ba-grid,.owners,.footer-grid,.blog-grid{grid-template-columns:1fr}
   .masonry{columns:1}
+  .article-body{padding:40px 22px 10px}
+  .article-figure{padding:0 22px;margin-top:-24px}
+  .article-cta{flex-direction:column;text-align:center}
   .deal{padding:30px;text-align:center;justify-content:center}
   .mobile-bar{display:flex}
   body{padding-bottom:70px}
