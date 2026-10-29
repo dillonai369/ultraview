@@ -422,3 +422,6 @@ section{padding:84px 0}
   body{padding-bottom:70px}
   .hero-badge{left:10px}
 }
+
+/* Phones: a cropped hero (same view, fewer bytes) */
+@media(max-width:700px){.hero--photo[style*="hero.jpg"]{background-image:url('hero-sm.jpg')!important}}
